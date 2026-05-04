@@ -3,7 +3,6 @@
 ![Precision](https://img.shields.io/badge/Precision-0.94-brightgreen)
 ![Recall](https://img.shields.io/badge/Recall-0.71-yellow)
 ![Model](https://img.shields.io/badge/Model-XGBoost-green)
-![Status](https://img.shields.io/badge/Status-Completed-blue)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
 An end-to-end machine learning pipeline for predictive maintenance that detects machine failures using industrial sensor data. This project benchmarks classical models against advanced boosting methods (XGBoost), addressing real-world challenges such as class imbalance and decision threshold optimization.
