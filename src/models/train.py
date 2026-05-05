@@ -7,9 +7,12 @@ from sklearn.metrics import (
     precision_score,
     recall_score
 )
+from sklearn.model_selection import cross_val_score, learning_curve
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from xgboost import XGBClassifier
+
 
 #Train the baseline model - Logistic Regression
 def train_model(X_train, y_train):
@@ -97,7 +100,7 @@ def train_xgboost(X_train, y_train):
         n_estimators=100,
         max_depth=4,
         learning_rate=0.1,
-        scale_pos_weight=1,
+        scale_pos_weight=28,
         random_state=42,
         use_label_encoder=False,
         eval_metric='logloss'
@@ -106,3 +109,40 @@ def train_xgboost(X_train, y_train):
     model.fit(X_train, y_train)
 
     return model
+
+# Cross-validation
+def evaluate_cross_validation(model, X_train, y_train):
+    scores = cross_val_score(
+        model,
+        X_train,
+        y_train,
+        cv=5,
+        scoring='recall'
+    )
+
+    print("\nCross-Validation Recall Scores:", scores)
+    print("Mean Recall:", scores.mean())
+
+# Plot Learning Curve
+def plot_learning_curve(model, X_train, y_train):
+    train_sizes, train_scores, val_scores = learning_curve(
+        model,
+        X_train,
+        y_train,
+        cv=5,
+        scoring='recall',
+        train_sizes=np.linspace(0.1, 1.0, 5)
+    )
+
+    train_mean = train_scores.mean(axis=1)
+    val_mean = val_scores.mean(axis=1)
+
+    plt.figure()
+    plt.plot(train_sizes, train_mean, label="Train Recall")
+    plt.plot(train_sizes, val_mean, label="Validation Recall")
+    plt.xlabel("Training Size")
+    plt.ylabel("Recall")
+    plt.title("Learning Curve")
+    plt.legend()
+    plt.savefig("outputs/learning_curve.png")
+    plt.close()

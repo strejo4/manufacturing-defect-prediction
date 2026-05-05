@@ -12,7 +12,9 @@ from src.models.train import (
     evaluate_model,
     evaluate_thresholds,
     plot_feature_importance,
-    train_xgboost
+    train_xgboost,
+    evaluate_cross_validation,
+    plot_learning_curve
 )
 
 # Load
@@ -60,5 +62,11 @@ xgb_model = train_xgboost(X_train, y_train)
 evaluate_model(xgb_model, X_test, y_test)
 evaluate_thresholds(xgb_model, X_test, y_test)
 
+#Cross-validation
+print("\n--- Cross Validation (XGBoost) ---")
+evaluate_cross_validation(xgb_model, X_train, y_train)
 
+#Learning curve
+print("\n--- Learning Curve (XGBoost) ---")
+plot_learning_curve(xgb_model, X_train, y_train)
 

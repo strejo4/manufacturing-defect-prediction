@@ -69,9 +69,34 @@ XGBoost achieved the best balance between precision and recall.
 2. Rotational_speed_rpm  
 3. Tool_wear_min  
 
-### Visualization
-
 ![Feature Importance](outputs/feature_importance.png)
+
+## Model Validation
+
+Cross-validation was used to ensure model robustness.
+
+- Mean Recall (CV): 0.87
+- Test Recall: 0.85
+
+This indicates strong generalization and low variance across folds.
+
+### Threshold Optimization
+
+Different thresholds were evaluated to balance precision and recall:
+
+| Threshold | Precision | Recall |
+|----------|----------|--------|
+| 0.5      | 0.41     | 0.85   |
+| 0.7      | 0.62     | 0.81   |
+| 0.9      | 0.80     | 0.66   |
+
+This allows adjusting the model depending on business needs.
+
+### Learning Curve
+
+The model shows high training performance and strong generalization, with validation recall improving as more data is used.
+
+![Learning Curve](outputs/learning_curve.png)
 
 ---
 
