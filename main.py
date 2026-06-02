@@ -1,3 +1,6 @@
+import os
+import joblib
+
 from src.data.preprocess import (
     load_data,
     clean_data,
@@ -69,4 +72,18 @@ evaluate_cross_validation(xgb_model, X_train, y_train)
 #Learning curve
 print("\n--- Learning Curve (XGBoost) ---")
 plot_learning_curve(xgb_model, X_train, y_train)
+
+
+## Save production artifacts
+
+os.makedirs("models", exist_ok=True)
+
+joblib.dump(xgb_model, "models/xgb_model.pkl")
+joblib.dump(scaler, "models/scaler.pkl")
+joblib.dump(X_train.columns.tolist(), "models/feature_columns.pkl")
+
+print("\nProduction artifacts saved:")
+print("-models/xgb_model.pkl")
+print("-models/scaler.pkl")
+print("-models/feature_names.pkl")
 
