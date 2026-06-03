@@ -16,7 +16,10 @@ The final solution includes:
 * Model serialization
 * FastAPI REST API
 * Interactive Swagger documentation
-* Deployment-ready architecture
+* Docker containerization
+* Cloud deployment with Render
+* Streamlit dashboard frontend
+* End-to-end MLOps workflow
 
 ---
 
@@ -153,6 +156,24 @@ Swagger UI allows users to test predictions interactively.
 
 ---
 
+## Live Demo
+
+The project is publicly deployed and available online.
+
+### Streamlit Dashboard
+
+https://manufacturing-defect-dashboard.onrender.com/
+
+Interactive dashboard that allows users to enter machine sensor values and receive real-time failure predictions.
+
+### FastAPI API Documentation
+
+https://manufacturing-defect-api.onrender.com/docs
+
+Interactive Swagger interface for testing the prediction API.
+
+---
+
 ## Example Request
 
 ```json
@@ -181,6 +202,33 @@ Swagger UI allows users to test predictions interactively.
 
 ---
 
+## Cloud Deployment
+
+The application has been deployed to the cloud using Render.
+
+### Architecture
+
+```text
+User
+    ↓
+Streamlit Dashboard
+    ↓
+FastAPI REST API
+    ↓
+XGBoost Model
+
+```
+The dashboard communicates with the production API through HTTP requests, while the API loads the serialized XGBoost model and returns real-time predictions.
+
+### Deployment Components
+
+* Render Web Service (FastAPI Backend)
+* Render Web Service (Streamlit Frontend)
+* Docker containerization
+* GitHub integration with automatic deployments
+
+---
+
 ## Tech Stack
 
 ### Machine Learning
@@ -195,6 +243,9 @@ Swagger UI allows users to test predictions interactively.
 
 * FastAPI
 * Uvicorn
+* Docker
+* Render
+* Streamlit
 * Joblib
 
 ### Visualization
@@ -230,6 +281,11 @@ Run the API:
 uvicorn app:app --reload
 ```
 
+Run the Streamlit dashboard:
+
+```bash
+streamlit run streamlit_app.py
+```
 ---
 
 ## Project Structure
@@ -258,6 +314,10 @@ manufacturing-defect-prediction/
 │       └── train.py
 │
 ├── app.py
+├── streamlit_app.py
+├── Dockerfile
+├── Dockerfile.streamlit
+├── .dockerignore
 ├── main.py
 ├── requirements.txt
 ├── README.md
@@ -268,13 +328,31 @@ manufacturing-defect-prediction/
 
 ## Future Work
 
-* Cloud deployment (Render)
 * CI/CD pipeline with GitHub Actions
 * Model monitoring
 * Automated retraining
 * MLflow integration
+* PostgreSQL integration for prediction storage
 * Unit testing
 * Kubernetes deployment
+
+---
+
+## Project Highlights
+
+This project demonstrates an end-to-end Machine Learning Engineering workflow:
+
+* Data preprocessing and feature engineering
+* Model training and evaluation
+* Model serialization with Joblib
+* REST API development using FastAPI
+* Interactive API testing with Swagger
+* Docker containerization
+* Cloud deployment using Render
+* Interactive Streamlit dashboard
+* Publicly accessible production application
+
+The project serves as a portfolio example of deploying machine learning models into production environments.
 
 ---
 
